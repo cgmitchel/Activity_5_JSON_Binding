@@ -32,5 +32,6 @@ An SAP Fiori application.
 #### Pre-requisites:
 
 1. Active NodeJS LTS (Long Term Support) version and associated supported NPM version.  (See https://nodejs.org)
+#2: fixing i18n error -Mitchel C. Gaabucayan
 
 
