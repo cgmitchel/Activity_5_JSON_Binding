@@ -1,0 +1,122 @@
+<mvc:View 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns="sap.m" 
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    core:require= "{formatter: 'sapips/training/jsonbinding/model/formatter'} "
+    controllerName="sapips.training.jsonbinding.controller.JSONBinding">
+ 
+    <Page id="page" title="{i18n>title}">
+<Panel id="_IDGenPanel" width="auto" class="sapUiResponsiveMargin" headerText="Data Binding Basics">
+<!-- done -->
+<content>
+<form:SimpleForm editable="true" layout="ResponsiveGridLayout" id="form0">
+<form:content>
+<Label text="EID" id="label0"/>
+<Input width="100%" id="input1" enabled="true" value="{myModel>/Eid}"/>
+<Label text="Enabled" id="label1"/>
+<CheckBox id="_IDGenCheckBox" selected="{myModel>/Enabled}" />
+</form:content>
+</form:SimpleForm>
+</content>
+</Panel>
+<!-- done -->
+<!-- done -->
+<Panel id="_IDGenPanel2" width="auto" class="sapUiResponsiveMargin" headerText="Address Details">
+<content>
+<form:SimpleForm editable="true" layout="ResponsiveGridLayout" id="form1">
+<form:content>
+<Label text="Address" id="label3"/>
+<Text
+                            id="_IDGenText"
+                            class="sapUiSmallMarginBottom"
+                            text="{= ${myModel>/Address/Street} + ' ' + ${myModel>/Address/Zip} + ' '
+                             + ${myModel>/Address/City} + ' ' + ${myModel>/Address/Country} }" />
+<!-- <Link id="_IDGenLink"
+                            text="Send Email"
+                            target="_blank"
+                            href="{path:'myModel>/Eid', formatter:'formatter.formatMail'}" />    -->
+<Link id="_IDGenLink"
+                        text="Send Email"
+                        press=".onSendEmail"
+                        href="javascript:void(0);"  
+                        />                                                       
+<Label text="Sales Amount" id="label4" class="sapUiSmallMarginBottom"/>
+<Input id="_IDGenInput" description="{myModel>/CurrencyCode}" enabled="true"
+                            value="{
+                                parts: [
+                                    { path: 'myModel>/SalesAmount' },
+                                    { path: 'myModel>/CurrencyCode' }
+                                ],
+                                type: 'sap.ui.model.type.Currency',
+                                formatOptions: {
+                                    showMeasure: false
+                                }
+                            }" />                        
+</form:content>
+</form:SimpleForm>
+</content>
+</Panel>
+<!-- done -->
+<!-- done -->
+<Panel id="_IDGenPanel3" width="auto" class="sapUiResponsiveMargin" headerText="Aggregiation Binding">
+<List id="_IDGenList"
+                    items="{ProductModel>/Products}"
+                    headerText="Products">
+<ObjectListItem id="_IDGenObjectListItem"
+                        title="{ProductModel>ProductName}"
+                        type="Active"
+                        press="onListItemPress"
+                        number="{
+                            parts:[{path:'ProductModel>UnitPrice'},{path:'myModel>/CurrencyCode'}],
+                            type: 'sap.ui.model.type.Currency',
+                            formatOptions: {showMeasure: false}
+                        }"
+                        numberUnit="{myModel>/CurrencyCode}">
+<ObjectAttribute id="_IDGenObjectAttribute" text="Stock on Hand {ProductModel>QuantityPerUnit}" />
+<!-- <ObjectAttribute id="_IDGenObjectAttribute2" 
+                            text="
+                                Current Stock Value: 
+                                {
+                                    parts:[{path:'ProductModel>UnitInStock'},{path:'ProductModel>UnitPrice'}, {path:'myModel>/CurrencyCode'}]
+                                }" 
+                            /> -->
+<ObjectAttribute  id="_IDGenObjectAttribute2"
+                            text="{
+                                parts:[
+                                    {path:'ProductModel>UnitPrice'},
+                                    {path:'ProductModel>UnitInStock'},
+                                    {path:'myModel>/CurrencyCode'}
+                                ],
+                                formatter: 'formatter.formatStockValue'
+                            }" />                            
+</ObjectListItem>
+</List>            
+</Panel>
+<!-- done -->
+<Panel id="_IDGenPanel4" width="auto" class="sapUiResponsiveMargin" headerText="Product Details">
+<content>
+<form:SimpleForm editable="true" layout="ResponsiveGridLayout" id="form02">
+<form:content>
+<Label text="ProductID" id="label01"/>
+<Input width="100%" id="ProductID" type="Text" />
+<Label text="ProductName" id="label11"/>
+<Input width="100%" id="ProductName"  type="Text" />
+ 
+                        <Label text="QuantityPerUnit" id="label12" />
+<Input width="100%" id="QuantityPerUnit"  type="Text" />
+ 
+ 
+                        <Label text="UnitPrice" id="label13"/>
+<Input width="100%" id="UnitPrice"  type="Number"/>     
+ 
+                        <Label text="UnitsInStock" id="label14"/>
+<Input width="100%" id="UnitsInStock"  type="Text" />          
+<Label text="Discontinued" id="label15"/>
+<Input width="100%" id="Discontinued"  type="Text" />                                                                                            
+</form:content>
+</form:SimpleForm>
+</content>            
+</Panel>        
+</Page>
+</mvc:View>
