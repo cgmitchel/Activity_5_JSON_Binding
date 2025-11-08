@@ -27,11 +27,12 @@ sap.ui.define([
  
             // set i18n model on view
             const i18nModel = new ResourceModel({
-                bundleName: "sapipstraining.jsonbinding.i18n.i18n"
+                 bundleName: "sapips.training.jsonbinding.i18n.i18n"
             });
             this.getView().setModel(i18nModel, "i18n");      
-            this.oBundle = this.getView().getModel("i18n").getResourceBundle();    
-        },
+            this.oBundle = this.getView().getModel("i18n").getResourceBundle(); 
+            
+       },
  
         onListItemPress(oEvent) {
             var oSelectedItem = oEvent.getSource();
